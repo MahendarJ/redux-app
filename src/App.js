@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CommentsCounter from "./CommentsCounter";
 import "./App.css";
-import Login from "./Login";
-import SignUp from "./SignUp";
+import Login from "./feature/login-signup/Login";
+import SignUp from "./feature/login-signup/SignUp";
 
 function App() {
   return (

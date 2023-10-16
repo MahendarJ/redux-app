@@ -2,7 +2,7 @@ import React from "react";
 import { AiOutlineLike, AiOutlineDislike } from "react-icons/ai";
 import { like, dislike } from "./LikeSlice";
 import { useDispatch, useSelector } from "react-redux";
-const ToggleLike = () => {
+const LikeToggle = () => {
     const value = useSelector((state)=>state.like.status)
     const dispatch = useDispatch()
     return (
@@ -15,4 +15,4 @@ const ToggleLike = () => {
     )
 }
 
-export default ToggleLike;
+export default LikeToggle;
