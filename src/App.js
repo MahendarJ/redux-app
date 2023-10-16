@@ -1,12 +1,19 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import CommentsCounter from "./CommentsCounter";
 import "./App.css";
-import Comments from "./feature/comments/Comments";
-import Counter from "./feature/counter/Counter";
+import Login from "./Login";
+import SignUp from "./SignUp";
 
 function App() {
   return (
     <div className="App">
-      <Counter />
-      <Comments />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/comment-inc_dec" element={<CommentsCounter />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
