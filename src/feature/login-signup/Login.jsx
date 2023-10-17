@@ -1,15 +1,21 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { fetchLogin } from "./UserEntersAxios";
 
 const Login = () => {
   const data = useSelector((state) => state.loginSignup.data);
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
-    username: "",
+    email: "",
     password: "",
   });
+
+  const navigate = useNavigate();
+
+  if (data?.username) {
+    navigate("comment-inc_dec");
+  }
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -17,12 +23,8 @@ const Login = () => {
   };
   const handleInputChange = (e) => {
     e.preventDefault();
-    console.log(e, "e");
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    setFormData({ ...formData, [name]: value });
   };
   return (
     <div
@@ -39,10 +41,10 @@ const Login = () => {
       <form onSubmit={handleLogin}>
         <input
           type="text"
-          id="username"
-          name="username"
-          placeholder="Username"
-          value={formData.username}
+          id="email"
+          name="email"
+          placeholder="Email"
+          value={formData.email}
           onChange={handleInputChange}
           required
         />
@@ -55,7 +57,8 @@ const Login = () => {
           value={formData.password}
           onChange={handleInputChange}
           required
-        /><br />
+        />
+        <br />
         <input type="submit" value="Sign In" />
       </form>
       <p>Login with Others</p>
@@ -65,7 +68,7 @@ const Login = () => {
       <Link to="/sign-up" style={{ textDecoration: "none" }}>
         Click to SignUp
       </Link>
-      <p>{data && data}</p>
+      {data === 'False' && "Invalid username or password"}
     </div>
   );
 };

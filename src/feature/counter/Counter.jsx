@@ -19,14 +19,11 @@ const Counter = () => {
   }, [value]);
 
   const arr = ['1', '1', 2, 3];
-  console.log("arr", arr);
 
   const noDuplicate = new Set(arr);
-  console.log('noDuplicate',noDuplicate);
 
   const name = 'namena';
   const split = name.split('');
-  console.log(split)
 
   const noDupSplit = new Set(split);
   

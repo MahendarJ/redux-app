@@ -2,7 +2,6 @@ import axios from "axios";
 import { fetchDataFailure, fetchDataSuccess } from "./LoginSignupSlice";
 
 export const fetchSignUp = (formData) => {
-  console.log("formData", formData);
   return async (dispatch) => {
     try {
       const response = await axios({
@@ -10,7 +9,6 @@ export const fetchSignUp = (formData) => {
         url: "http://127.0.0.1:8000/like/sign-up",
         data: JSON.stringify(formData), // Use 'data' instead of 'body'
       });
-      console.log(response);
       dispatch(fetchDataSuccess(response.data));
     } catch (error) {
       dispatch(fetchDataFailure(error.message));

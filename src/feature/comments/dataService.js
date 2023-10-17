@@ -1,20 +1,31 @@
 import axios from "axios";
+import Cookies from "js-cookie";
+
 import {
   fetchCommentsStart,
   fetchDataSuccess,
   fetchDataFailure,
 } from "./commentsSlice";
 
+
+
 export const fetchComments = () => {
+  const jwtToken = Cookies.get('jwt')
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: jwtToken,
+  };
   return async (dispatch) => {
     dispatch(fetchCommentsStart());
-    try {
-      const response = await axios.get(
-        "https://jsonplaceholder.typicode.com/comments/"
-      );
-      dispatch(fetchDataSuccess(response.data));
-    } catch (error) {
-      dispatch(fetchDataFailure(error.message));
+    if(jwtToken){
+      try {
+        const response = await axios.get("http://127.0.0.1:8000/like/get-post", {
+          headers: headers,
+        });
+        dispatch(fetchDataSuccess(response.data));
+      } catch (error) {
+        dispatch(fetchDataFailure(error.message));
+      }
     }
   };
 };
