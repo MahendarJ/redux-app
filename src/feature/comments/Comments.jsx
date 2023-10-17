@@ -7,7 +7,6 @@ const Comments = () => {
   const data = useSelector((state) => state.comments);
   const value = useSelector((state) => state.counter.count);
   const comments = data.data;
-  console.log("comments", comments);
   const dispatch = useDispatch();
 
   useEffect(() => {

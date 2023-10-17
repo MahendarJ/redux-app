@@ -6,7 +6,9 @@ const SignUp = () => {
   const data = useSelector((state) => state.loginSignup.data);
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
-    username: "",
+    firstname:"",
+    lastname:"",
+    email: "",
     password: "",
   });
 
@@ -16,7 +18,6 @@ const SignUp = () => {
   };
   const handleInputChange = (e) => {
     e.preventDefault();
-    console.log(e, "e");
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -34,12 +35,32 @@ const SignUp = () => {
             marginTop: 50,
           }}
         >
-          <label htmlFor="username">Username :</label>
+          <label htmlFor="firstname">firstname :</label>
           <input
             type="text"
-            id="username"
-            name="username"
-            value={formData.username}
+            id="firstname"
+            name="firstname"
+            value={formData.firstname}
+            onChange={handleInputChange}
+            required
+          />
+          <br />
+          <label htmlFor="lastname">lastname :</label>
+          <input
+            type="text"
+            id="lastname"
+            name="lastname"
+            value={formData.lastname}
+            onChange={handleInputChange}
+            required
+          />
+          <br />
+          <label htmlFor="email">email :</label>
+          <input
+            type="text"
+            id="email"
+            name="email"
+            value={formData.email}
             onChange={handleInputChange}
             required
           />
