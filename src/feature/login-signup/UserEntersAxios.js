@@ -24,6 +24,8 @@ export const fetchLogin = (formData) => {
         url: "http://127.0.0.1:8000/like/login",
         data: JSON.stringify(formData),
       });
+      localStorage.setItem("token",response?.data?.token)
+      localStorage.setItem("username",response?.data?.username)
       dispatch(fetchDataSuccess(response.data));
     } catch (error) {
       dispatch(fetchDataFailure(error.message));
