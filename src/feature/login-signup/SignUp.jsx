@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSignUp } from "./UserEntersAxios";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const data = useSelector((state) => state.loginSignup.data);
@@ -11,6 +12,12 @@ const SignUp = () => {
     email: "",
     password: "",
   });
+
+  const navigate = useNavigate();
+  console.log(data?.msg)
+  if (data === 'success') {
+    navigate("/");
+  }
 
   const handleSignup = (e) => {
     e.preventDefault();

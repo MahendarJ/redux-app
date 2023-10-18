@@ -1,6 +1,4 @@
 import axios from "axios";
-import Cookies from "js-cookie";
-
 import {
   fetchCommentsStart,
   fetchDataSuccess,
@@ -10,7 +8,7 @@ import {
 
 
 export const fetchComments = () => {
-  const jwtToken = Cookies.get('jwt')
+  const jwtToken = localStorage.getItem("token")
   const headers = {
     "Content-Type": "application/json",
     Authorization: jwtToken,

@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const LoginSingupSlice = createSlice({
   name: 'loginSignup',
   initialState: {
-    data: '',
+    data:'',
     error:null
   },
   reducers: {
