@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { fetchLogin } from "./UserEntersAxios";
@@ -10,12 +10,13 @@ const Login = () => {
     email: "",
     password: "",
   });
-
+  console.log(data, typeof data);
   const navigate = useNavigate();
-
-  if (data?.username) {
-    navigate("comment-inc_dec");
-  }
+  useEffect(() => {
+    if (typeof data === "object" && data !== null) {
+      navigate("comment-inc_dec");
+    }
+  }, [data]);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -68,7 +69,7 @@ const Login = () => {
       <Link to="/sign-up" style={{ textDecoration: "none" }}>
         Click to SignUp
       </Link>
-      {data === 'False' && "Invalid username or password"}
+      {data === "False" && "Invalid username or password"}
     </div>
   );
 };
