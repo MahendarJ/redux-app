@@ -63,7 +63,7 @@ const Login = () => {
         <input type="submit" value="Sign In" />
       </form>
       <p>Login with Others</p>
-      <button>Login with google </button> <br />
+      <button>Sign with google </button> <br />
       <button> Login with Facebook</button>
       <br />
       <Link to="/sign-up" style={{ textDecoration: "none" }}>
