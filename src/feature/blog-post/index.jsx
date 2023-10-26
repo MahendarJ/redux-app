@@ -1,14 +1,10 @@
-import React from "react";
-import PostLists from "./posts/PostLists";
-import AddPostForm from "./posts/AddPostForm";
+// import React from "react";
 
-const index = () => {
-  return (
-    <div>
-      <AddPostForm />
-      <PostLists />
-    </div>
-  );
-};
 
-export default index;
+// const index = () => {
+//   return (
+//     <p>jjj</p>
+//   );
+// };
+
+// export default index;
