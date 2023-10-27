@@ -1,23 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSignUp } from "./UserEntersAxios";
 import { useNavigate } from "react-router-dom";
+import { dataNull } from "./LoginSignupSlice";
 
 const SignUp = () => {
   const data = useSelector((state) => state.loginSignup.data);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    firstname:"",
-    lastname:"",
+    firstname: "",
+    lastname: "",
     email: "",
     password: "",
   });
 
-  const navigate = useNavigate();
-  console.log(data?.msg)
-  if (data === 'success') {
-    navigate("/");
-  }
+  useEffect(() => {
+    if (data === "User created successfully") {
+      navigate("/");
+      dispatch(dataNull());
+    }
+  }, [data]);
 
   const handleSignup = (e) => {
     e.preventDefault();

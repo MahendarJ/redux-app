@@ -1,23 +1,24 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
+import { dataNull } from "../login-signup/LoginSignupSlice";
 
 const Profile = () => {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const profile = useSelector((state) => state.loginSignup.data);
-  const username = localStorage.getItem('username')
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
   const handleLogout = () => {
-    localStorage.clear()
-    navigate('/')
-    
-  }
+    dispatch(dataNull());
+    navigate("/");
+  };
   return (
     <div>
-      <button onClick={() => setIsOpen(!isOpen)}>Hi, {username}</button>
+      <button onClick={() => setIsOpen(!isOpen)}>
+        Hi, {profile?.username}
+      </button>
       {isOpen && (
-        <div style={{backgroundColor:'black'}}>
+        <div>
           <p>{profile?.email}</p>
           <p onClick={handleLogout}>Logout</p>
         </div>
