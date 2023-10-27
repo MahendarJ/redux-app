@@ -1,6 +1,14 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import {
+  deleteUserInfo,
+  editUserInfo,
+  getUserInfo,
+  postUserInfo,
+} from "./UserDetailsSlice";
 
 const UserDetails = () => {
+  const dispatch = useDispatch();
   const [userDetails, setUserDetails] = useState({
     name: "",
     username: "",
@@ -10,18 +18,39 @@ const UserDetails = () => {
     company_name: "",
     company_catch_phrase: "",
     company_bs: "",
-    street: "",
-    suite: "",
-    city: "",
-    zipcode: "",
-    lat: "",
-    lng: "",
+    address: {
+      street: "",
+      suite: "",
+      city: "",
+      zipcode: "",
+      lat: "",
+      lng: "",
+    },
   });
-  console.log(userDetails)
+
   const handleDetails = (e) => {
     const { name, value } = e.target;
-    setUserDetails({...userDetails,[name]:value});
+    if (name.startsWith("address.")) {
+      const addressField = name.split(".")[1]; // Extract the address field name
+      setUserDetails({
+        ...userDetails,
+        address: {
+          ...userDetails.address,
+          [addressField]: value,
+        },
+      });
+    } else {
+      setUserDetails({ ...userDetails, [name]: value });
+    }
   };
+
+  const handleSave = () => {
+    // dispatch(postUserInfo(userDetails));
+    // dispatch(editUserInfo(userDetails));
+    // dispatch(getUserInfo());
+    dispatch(deleteUserInfo());
+  };
+
   return (
     <div style={{ display: "flex", gap: "10rem", justifyContent: "center" }}>
       <div style={{ display: "flex", flexDirection: "column" }}>
@@ -79,29 +108,42 @@ const UserDetails = () => {
         </h2>
         <label htmlFor="street">Street:</label>
         <input
-          name="street"
-          value={userDetails.street}
+          name="address.street"
+          value={userDetails.address.street}
           onChange={handleDetails}
         />
         <label htmlFor="suite">Suite:</label>
         <input
-          name="suite"
-          value={userDetails.suite}
+          name="address.suite"
+          value={userDetails.address.suite}
           onChange={handleDetails}
         />
         <label htmlFor="city">City:</label>
-        <input name="city" value={userDetails.city} onChange={handleDetails} />
+        <input
+          name="address.city"
+          value={userDetails.address.city}
+          onChange={handleDetails}
+        />
         <label htmlFor="zipcode">Zipcode:</label>
         <input
-          name="zipcode"
-          value={userDetails.zipcode}
+          name="address.zipcode"
+          value={userDetails.address.zipcode}
           onChange={handleDetails}
         />
         <label htmlFor="lat">Lat:</label>
-        <input name="lat" value={userDetails.lat} onChange={handleDetails} />
+        <input
+          name="address.lat"
+          value={userDetails.address.lat}
+          onChange={handleDetails}
+        />
         <label htmlFor="lng">Lng:</label>
-        <input name="lng" value={userDetails.lng} onChange={handleDetails} />
+        <input
+          name="address.lng"
+          value={userDetails.address.lng}
+          onChange={handleDetails}
+        />
       </div>
+      <button onClick={handleSave}>Save</button>
     </div>
   );
 };
